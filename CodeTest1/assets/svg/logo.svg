@@ -1,0 +1,24 @@
+<svg width="400" height="100" viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .letter {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 60px;
+      font-weight: bold;
+    }
+    .L1 { fill: #2c3e50; transform: translateX(0px); }
+    .L2 { fill: #34495e; transform: translateX(-20px); }
+    .L3 { fill: #5d6d7e; transform: translateX(-40px); }
+    .L4 { fill: #7f8c8d; transform: translateX(-60px); }
+    .L5 { fill: #95a5a6; transform: translateX(-80px); }
+    .L6 { fill: #bdc3c7; transform: translateX(-100px); }
+    .L7 { fill: #ecf0f1; transform: translateX(-120px); }
+  </style>
+
+  <text x="180" y="70" class="letter L7">M</text>
+  <text x="180" y="70" class="letter L6">O</text>
+  <text x="180" y="70" class="letter L5">H</text>
+  <text x="180" y="70" class="letter L4">A</text>
+  <text x="180" y="70" class="letter L3">M</text>
+  <text x="180" y="70" class="letter L2">A</text>
+  <text x="180" y="70" class="letter L1">D</text>
+</svg>
