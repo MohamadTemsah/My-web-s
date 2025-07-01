@@ -1,0 +1,424 @@
+/* --- Imports & Global Settings --- */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
+
+html {
+  overflow-y: scroll;
+}
+html, body {
+  overflow-x: clip;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: "Poppins", serif;
+}
+
+/* --- Theme Variables --- */
+:root {
+  --bg-color: #222831;
+  --text-color: #EEEEEE;
+  --accent-color: #00ADB5;
+  --card-bg: rgba(57, 62, 70, 0.5);
+}
+html.light-mode {
+  --bg-color: #F4F4F4;
+  --text-color: #222831;
+  --accent-color: #007B8A;
+  --card-bg: rgba(230, 230, 230, 0.6);
+}
+
+/* --- Body Styling --- */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  will-change: background-color, color;
+}
+
+/* --- Centered Header --- */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+/* قاعدة جديدة للحاوية اليمنى */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* 2. الحاوية الداخلية (لتوسيط المحتوى) */
+.header-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 35rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+#logo {
+  width: 250px;
+  height: auto;
+}
+
+/* 3. الخط الفاصل (بعرض كامل) */
+hr {
+  opacity: 10%;
+  border-color: var(--text-color);
+}
+html.light-mode hr {
+  border-color: rgba(0, 0, 0, 0.15); /* لون أسود شفاف بشكل معتدل */
+  opacity: 1; /* <-- أهم تعديل: نزيل الشفافية الإضافية ونجعله واضحاً */
+}
+
+/* 4. زر التبديل (ثابت أعلى يمين الشاشة) */
+.theme-switcher {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.theme-switcher { transition: opacity 0.3s ease; }
+
+.navigation ul {
+  display: flex;
+  list-style-type: none;
+  gap: 2rem;
+}
+.navigation a {
+  text-decoration: none;
+  color: var(--text-color);
+  transition: color 0.2s ease;
+}
+.navigation a:hover {
+  color: var(--accent-color);
+}
+
+/* --- Theme Toggle Switch --- */
+.slider {
+  width: 60px;
+  height: 32px;
+  background-color: #4A4A4A;
+  border-radius: 34px;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+.thumb {
+  width: 28px;
+  height: 28px;
+  background-color: #222831;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.thumb svg {
+  position: absolute;
+  transition: opacity 0.3s ease;
+}
+.icon-sun { opacity: 0; }
+.icon-moon { opacity: 1; }
+#theme-toggle-checkbox:checked + .slider {
+  background-color: #007B8A;
+}
+#theme-toggle-checkbox:checked + .slider .thumb {
+  transform: translateX(28px);
+}
+#theme-toggle-checkbox:checked + .slider .thumb .icon-moon {
+  opacity: 0;
+}
+#theme-toggle-checkbox:checked + .slider .thumb .icon-sun {
+  opacity: 1;
+}
+
+/* --- Scroll-Up Button --- */
+#scrollBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 18px;
+  background-color: #2c5d5f;
+  color: white;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+#scrollBtn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+#scrollBtn:hover {
+  transform: scale(1.1);
+}
+
+/* --- Page Sections --- */
+.hero { position: relative; display: flex; justify-content: space-between; align-items: center; margin: 5rem auto; max-width: 1200px; flex-wrap: wrap; padding: 0 1.5rem; }
+.hero-content-wrapper { position: relative; }
+.arrow { position: absolute; transform: translateX(-5.5rem) translateY(1.5rem); z-index: 3; }
+.heroSub { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 0.5rem; }
+.name { font-size: 3rem; }
+.title { font-size: 4rem; color: var(--accent-color); }
+.heroBtns { display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+.hireMe, .cv { border-radius: 24px; padding: 0.5rem 1.5rem; text-decoration: none; text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5); display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; transition: all 0.2s ease; }
+.hireMe:hover, .cv:hover { transform: scale(1.05); }
+.hireMe { background-color: var(--accent-color); color: #FFFFFF; }
+.cv {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 2px solid transparent; /* <-- أضف هذا السطر المهم */
+}
+html.light-mode .hireMe { box-shadow: 0 4px 15px rgba(0, 123, 138, 0.3); }
+html.light-mode .cv { color: var(--accent-color); background-color: transparent; border: 2px solid var(--accent-color); }
+html.light-mode .cv:hover { background-color: var(--accent-color); color: #FFFFFF; }
+
+.aboutMe { display: flex; justify-content: space-between; align-items: center; margin: 5rem auto; max-width: 1200px; gap: 5rem; padding: 0 1.5rem; }
+.textContainer { display: flex; flex-direction: column; }
+.textTitle { display: flex; align-items: center; gap: 5px; font-size: 2rem; }
+.aboutName { color: var(--text-color); }
+.aboutTitle { color: var(--accent-color); }
+.aboutMeParagraf { text-align: justify; opacity: 0.75; }
+
+.works { padding: 10rem 1rem; margin: 5rem 0; position: relative; }
+.worksContainer ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 5rem; padding: 0; list-style: none; margin-top: 2rem; }
+.worksContainer .projectTitle { display: flex; flex-direction: column; align-items: flex-start; max-width: 1200px; margin: 0 auto 2rem auto; padding: 0 1.5rem; }
+.worksContainer .aboutName, .worksContainer .aboutTitle { font-size: 3rem; }
+.projectCard { position: relative; overflow: hidden; border-radius: 20px; background-color: var(--card-bg); padding: 1rem; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); transition: transform 0.3s ease, box-shadow 0.3s ease; width: 300px; height: 220px; }
+.projectCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.4s ease; /* هذا السطر يجعل الحركة ناعمة */
+}
+.projectCard:hover img {
+  transform: scale(1.1); /* نكبر حجم الصورة بنسبة 10% */
+}
+.projectCard:hover { transform: translateY(-10px); }
+.projectInfo { position: absolute; bottom: 0; left: 0; width: 100%; padding: 0.6rem; background-color: var(--accent-color); color: white; text-align: center; font-size: 0.9rem; opacity: 0; transform: translateY(100%); transition: opacity 0.3s ease, transform 0.3s ease; }
+.projectCard:hover .projectInfo { opacity: 1; transform: translateY(0); }
+.projectInfoLink { text-align: center; display: block; text-decoration: none; }
+
+.contactContainer { display: flex; flex-direction: column; align-items: center; gap: 2rem; margin: 5rem auto; max-width: 1200px; padding: 0 1.5rem; }
+.contactTitle { display: flex; align-items: center; justify-content: center; gap: 5px; font-size: 2rem; }
+.contact { display: flex; align-items: center; justify-content: center; gap: 5rem; flex-wrap: wrap; }
+.emailAndPhone { display: flex; align-items: center; gap: 10px; }
+.contact h3, .contact a { color: var(--text-color); text-decoration: none; }
+.contactForm { display: flex; flex-direction: column; gap: 1rem; width: 100%; max-width: 600px; margin-top: 2rem; }
+.contactForm input, .contactForm textarea { padding: 1rem; border: 1px solid transparent; border-radius: 8px; background-color: #393E46; color: #EEEEEE; font-size: 1rem; width: 100%; transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+.contactForm input::placeholder, .contactForm textarea::placeholder { color: #a9a9a9; }
+.contactForm button { background-color: var(--accent-color); color: white; padding: 1rem; border: none; border-radius: 8px; cursor: pointer; transition: background-color 0.2s ease; width: 100%; }
+.contactForm button:hover { background-color: #019ba1; }
+html.light-mode .contactForm input, html.light-mode .contactForm textarea { background-color: #EAEAEA; color: #222831; border-color: #ccc; }
+html.light-mode .contactForm input::placeholder, html.light-mode .contactForm textarea::placeholder { color: #888; }
+.socialMedia { display: flex; align-items: center; justify-content: center; gap: 2rem; margin-top: 2rem; }
+.socialMedia a { display: flex; align-items: center; justify-content: center; border-radius: 50%; background-color: var(--card-bg); padding: 1rem; transition: transform 0.2s ease; }
+.socialMedia a:hover { transform: scale(1.1); }
+.emailAndPhone img, .cv img, .light { width: 32px; height: 32px; object-fit: contain; vertical-align: middle; }
+.socialMedia img { width: 24px; height: 24px; }
+footer { color: var(--text-color); padding: 2rem; text-align: center; opacity: 0.7; position: relative; z-index: 10; }
+
+ /*  Final Responsive Design for Mobile
+   ================================= */
+@media (max-width: 768px) {
+
+  /* --- Final Mobile Header --- */
+  header {
+    padding: 1rem; /* هامش بسيط للهيدر */
+  }
+  .header-content {
+    position: relative; /* مهم جداً لتثبيت زر التبديل بداخله */
+    display: flex;
+    flex-direction: column; /* نجعل العناصر تحت بعضها */
+    align-items: center; /* نجعلها في المنتصف */
+    gap: 1rem; /* مسافة بين الشعار والقائمة */
+  }
+  .header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem; /* مسافة بين القائمة والزر */
+  }
+  #logo {
+    order: 1; /* الشعار أولاً */
+  }
+  .navigation {
+    order: 2; /* القائمة ثانياً */
+  }
+  .navigation ul {
+    padding: 0;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+  .theme-switcher {
+    order: 3; /* زر التبديل أخيراً */
+  }
+
+  /* --- Other Sections --- */
+  .arrow {
+    display: none;
+  }
+  .hero, .aboutMe, .worksContainer ul, .contact {
+    flex-direction: column;
+  }
+  .hero {
+    text-align: center;
+    gap: 3rem;
+    margin-top: 4rem;
+  }
+  .heroImg, .aboutMeImg {
+    width: 80%;
+    max-width: 300px;
+  }
+  .heroImg {
+    order: -1;
+  }
+  .name {
+    font-size: 2.2rem;
+  }
+  .title {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  .heroBtns {
+    justify-content: center;
+  }
+  .aboutMe {
+    gap: 2rem;
+  }
+  .aboutMeParagraf {
+    text-align: center;
+  }
+  .works {
+    padding: 4rem 1rem;
+  }
+  .worksContainer .projectTitle {
+    align-items: center;
+  }
+  .worksContainer .aboutName, .worksContainer .aboutTitle {
+    font-size: 2.5rem;
+  }
+  .worksContainer ul {
+  flex-direction: column;
+  gap: 2.5rem;
+  align-items: center; /* <-- أضف هذا السطر لتوسيط الكروت */
+}
+  .projectCard {
+    width: 90%;
+    max-width: 350px;
+  }
+  .contact {
+    gap: 2rem;
+    align-items: flex-start;
+  }
+}
+/* =================================
+   Professional Theme Toggle Switch
+   ================================= */
+
+.theme-switcher {
+  display: flex; /* نستخدم flex لتوسيطه عمودياً مع القائمة */
+  align-items: center;
+  cursor: pointer;
+}
+
+.slider {
+  width: 60px;
+  height: 32px;
+  background-color: #4A4A4A;
+  border-radius: 34px;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.thumb {
+  width: 28px;
+  height: 28px;
+  background-color: #222831;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* أيقونات الشمس والقمر */
+.thumb svg {
+  position: absolute;
+  transition: opacity 0.2s ease;
+}
+
+.icon-sun {
+  opacity: 0; /* الشمس تكون مخفية في البداية (الوضع المظلم) */
+}
+
+.icon-moon {
+  opacity: 1; /* القمر يكون ظاهراً */
+}
+
+
+/* --- عندما يتم تفعيل الـ checkbox --- */
+
+/* 1. تغيير خلفية الشريط */
+#theme-toggle-checkbox:checked + .slider {
+  background-color: #007B8A;
+}
+
+/* 2. تحريك الدائرة لليمين */
+#theme-toggle-checkbox:checked + .slider .thumb {
+  transform: translateX(28px);
+}
+
+/* 3. إخفاء القمر وإظهار الشمس */
+#theme-toggle-checkbox:checked + .slider .thumb .icon-moon {
+  opacity: 0;
+}
+#theme-toggle-checkbox:checked + .slider .thumb .icon-sun {
+  opacity: 1;
+}
+/* =================================
+   Final Fix for Theme Toggle Icons
+   ================================= */
+
+/* لون أيقونة القمر (في الوضع المظلم) */
+.icon-moon {
+  stroke: #FFC700; /* لون أصفر واضح */
+}
+
+/* لون أيقونة الشمس (في الوضع الفاتح) */
+.icon-sun {
+  /* لون أبيض يظهر جيداً على خلفية الزر الزرقاء */
+  stroke: #FFFFFF; 
+}
+/* =================================
+   Final Fix for Download CV Icon
+   ================================= */
+
+html.light-mode .cv img {
+  filter: invert(1);
+}

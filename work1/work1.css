@@ -1,0 +1,111 @@
+/* --- Global Styles & Background --- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #222831; /* لون خلفية داكن احتياطي */
+}
+
+/* حاوية الخلفية المتحركة */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1; /* وضعها خلف كل شيء */
+}
+
+/* --- Card Container --- */
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    gap: 30px;
+    flex-wrap: wrap;
+    padding: 20px;
+    /* هذا يضمن أن الحاوية فوق الخلفية المتحركة */
+    position: relative; 
+    z-index: 1;
+}
+
+/* --- The Card --- */
+.card {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+/* The Icon Area */
+.card .icon-area {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8em;
+    color: #fff;
+    transition: 0.5s;
+}
+
+/* The Info Panel (initially hidden) */
+.card .info-area {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    /* -- هذا هو السر: ندفعها للأسفل بمقدار ارتفاعها -- */
+    transform: translateY(120px); 
+    transition: transform 0.5s;
+}
+
+/* --- The Hover Effect --- */
+.card:hover {
+    transform: translateY(-10px); /* نرفع الكرت قليلاً */
+}
+
+.card:hover .info-area {
+    /* -- نعيد اللوحة لمكانها الأصلي لتنزلق للأعلى -- */
+    transform: translateY(0);
+}
+
+.card:hover .icon-area {
+    /* -- نرفع الأيقونة للأعلى -- */
+    transform: translateY(-70px);
+}
+
+/* --- Info Panel Content --- */
+.info-area h3 {
+    margin: 0 0 5px 0;
+    padding: 0;
+    font-size: 1.6em;
+    color: #333;
+}
+
+.info-area p {
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+    color: #666;
+}
+/* --- Link Styling Fix --- */
+.card-link {
+  text-decoration: none; /* يزيل الخط السفلي من الرابط */
+}
+
+/* --- Brand Colors --- */
+.card.youtube .icon-area { background: #c4302b; }
+.card.facebook .icon-area { background: #3b5998; }
+.card.github .icon-area { background: #171515; }
