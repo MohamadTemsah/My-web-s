@@ -4,74 +4,56 @@ window.scrollToTop = function () {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  /* -------- أزرار أخرى -------- */
-  const scrollBtn = document.getElementById("scrollBtn");
-  if (scrollBtn) {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
-        scrollBtn.classList.add("visible");
-      } else {
-        scrollBtn.classList.remove("visible");
-      }
-    });
-  }
+    console.log("✅ Personal site script loaded correctly.");
 
-  /* -------- زر التبديل يختفي عند النزول -------- */
-  const themeSwitcher = document.querySelector(".theme-switcher");
-  let lastY = window.scrollY;
+    // --- 1. تعريف العناصر الأساسية ---
+    const scrollBtn = document.getElementById("scrollBtn");
+    const themeToggle = document.getElementById("theme-toggle-checkbox");
+    const imageElements = {
+        logo: document.getElementById("logo"),
+        emailIcon: document.getElementById("emailIcon"),
+        phoneIcon: document.getElementById("phoneIcon")
+        // يمكنك إضافة أي أيقونات أخرى هنا
+    };
 
-  if (themeSwitcher) {
-    themeSwitcher.style.transition = "opacity 0.3s ease"; // تأكيد انتقال سلس
+    // --- 2. منطق زر الصعود للأعلى ---
+    if (scrollBtn) {
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+                scrollBtn.classList.add("visible");
+            } else {
+                scrollBtn.classList.remove("visible");
+            }
+        });
+    }
+    window.scrollToTop = function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > lastY) {
-        // المستخدم ينزل ↓
-        themeSwitcher.style.opacity = "0";
-        themeSwitcher.style.pointerEvents = "none";
-      } else {
-        // المستخدم يصعد ↑
-        themeSwitcher.style.opacity = "1";
-        themeSwitcher.style.pointerEvents = "auto";
-      }
-      lastY = window.scrollY;
-    });
-  }
+    // --- 3. الدالة الرئيسية لتطبيق الثيم وتبديل الصور ---
+    function applyTheme(theme) {
+        document.documentElement.className = theme + '-mode';
+        localStorage.setItem('theme', theme);
 
-  /* -------- منطق الثيم والأيقونات -------- */
-  const imageElements = {
-    logo: document.getElementById("logo"),
-    emailIcon: document.getElementById("emailIcon"),
-    phoneIcon: document.getElementById("phoneIcon"),
-  };
+        const isLight = theme === 'light';
 
-function applyTheme(theme) {
-  document.documentElement.className = `${theme}-mode`;
-  localStorage.setItem("theme", theme);
-  const isLight = theme === "light"; // <-- أضفنا هذا السطر لتعريف المتغير
+        // تبديل كل الصور لتتوافق مع الثيم
+        if (imageElements.logo) imageElements.logo.src = isLight ? './assets/svg/logo-light.svg' : './assets/svg/logo-dark.svg';
+        if (imageElements.emailIcon) imageElements.emailIcon.src = isLight ? './assets/svg/email-light.svg' : './assets/svg/email-dark.svg';
+        if (imageElements.phoneIcon) imageElements.phoneIcon.src = isLight ? './assets/svg/phone-light.svg' : './assets/svg/phone-dark.svg';
+    }
 
-  if (imageElements.logo)
-    imageElements.logo.src = isLight
-      ? "./assets/svg/logo-light.svg"
-      : "./assets/svg/logo-dark.svg";;
-    if (imageElements.emailIcon)
-      imageElements.emailIcon.src = isLight
-        ? "assets/svg/email-light.svg"
-        : "assets/svg/email-dark.svg";
-    if (imageElements.phoneIcon)
-      imageElements.phoneIcon.src = isLight
-        ? "assets/svg/phone-light.svg"
-        : "assets/svg/phone-dark.svg";
-  }
+    // --- 4. منطق زر تبديل الوضع ---
+    if (themeToggle) {
+        // عند تحميل الصفحة، تأكد من أن وضع الزر يطابق الثيم المحفوظ
+        themeToggle.checked = document.documentElement.classList.contains('light-mode');
 
-  const themeToggle = document.getElementById("theme-toggle-checkbox");
-  if (themeToggle) {
-    themeToggle.checked = document.documentElement.classList.contains(
-      "light-mode"
-    );
-    themeToggle.addEventListener("change", function () {
-      applyTheme(this.checked ? "light" : "dark");
-    });
-  }
+        // عند تغيير حالة الزر، قم بتطبيق الثيم الجديد
+        themeToggle.addEventListener("change", function () {
+            const newTheme = this.checked ? 'light' : 'dark';
+            applyTheme(newTheme);
+        });
+    }
 
   /* -------- Vanta background -------- */
   let vantaEffect = null;
