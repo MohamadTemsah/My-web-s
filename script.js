@@ -44,14 +44,13 @@ document.addEventListener("DOMContentLoaded", function () {
     phoneIcon: document.getElementById("phoneIcon"),
   };
 
-  function applyTheme(theme) {
-    document.documentElement.className = `${theme}-mode`;
-    localStorage.setItem("theme", theme);
-    const isLight = theme === "light";
-    if (imageElements.logo)
-      imageElements.logo.src = isLight
-        ? "assets/svg/logo-light.svg"
-        : "assets/svg/logo-dark.svg";
+ function applyTheme(theme) {
+  // ...
+  if (imageElements.logo)
+    imageElements.logo.src = isLight
+      ? "./assets/svg/logo-light.svg"
+      <span class="pun">;</span>
+      : "./assets/svg/logo-dark.svg";
     if (imageElements.emailIcon)
       imageElements.emailIcon.src = isLight
         ? "assets/svg/email-light.svg"
