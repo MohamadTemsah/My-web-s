@@ -21,9 +21,10 @@
     
     <header>
         <div class="header-content">
-           <script>
+            <script>
+                // هذا السكربت يحدد الثيم المحفوظ ويطبع وسم الصورة مباشرة مع الرابط الصحيح
                 const themeForLogo = localStorage.getItem('theme') || 'dark';
-                const logoSrc = themeForLogo === 'light' ? './assets/svg/logo-light.svg' : './assets/svg/logo-dark.svg';
+                const logoSrc = themeForLogo === 'light' ? 'assets/svg/logo-light.svg' : 'assets/svg/logo-dark.svg';
                 document.write(`<img id="logo" src="${logoSrc}" alt="Mohamad logo" />`);
             </script>
             <nav class="navigation">
