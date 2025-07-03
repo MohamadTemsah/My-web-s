@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const isLight = theme === 'light';
 
         // تبديل كل الصور لتتوافق مع الثيم
-        if (imageElements.logo) imageElements.logo.src = isLight ? './assets/svg/logo-light.svg' : './assets/svg/logo-dark.svg';
+        if (imageElements.logo) imageElements.logo.src = isLight ? './assets/svg/logo-light.svg' : './assets/svg/logo-Dark.svg';
         if (imageElements.emailIcon) imageElements.emailIcon.src = isLight ? './assets/svg/email-light.svg' : './assets/svg/email-dark.svg';
         if (imageElements.phoneIcon) imageElements.phoneIcon.src = isLight ? './assets/svg/phone-light.svg' : './assets/svg/phone-dark.svg';
     }
